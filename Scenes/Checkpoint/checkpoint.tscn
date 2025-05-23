@@ -1,0 +1,75 @@
+[gd_scene load_steps=10 format=3 uid="uid://1rsun67nkh8k"]
+
+[ext_resource type="Texture2D" uid="uid://bp054lxy7k5lh" path="res://Assets/Images/Tiles/wdw.png" id="1_2nvma"]
+[ext_resource type="Script" path="res://Scripts/Checkpoint/checkpoint.gd" id="1_jahbx"]
+[ext_resource type="PackedScene" uid="uid://cchdf14u505wm" path="res://Scenes/Checkpoint/light_occluder_2d.tscn" id="2_arqdm"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vkk43"]
+texture = ExtResource("1_2nvma")
+texture_region_size = Vector2i(32, 32)
+0:11/0 = 0
+0:11/0/texture_origin = Vector2i(0, -7)
+1:11/0 = 0
+1:11/0/texture_origin = Vector2i(0, -7)
+
+[sub_resource type="TileSet" id="TileSet_u7r82"]
+tile_shape = 1
+tile_size = Vector2i(32, 16)
+sources/0 = SubResource("TileSetAtlasSource_vkk43")
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_gv1s6"]
+texture = ExtResource("1_2nvma")
+texture_region_size = Vector2i(32, 32)
+0:11/0 = 0
+0:11/0/texture_origin = Vector2i(0, -7)
+1:11/0 = 0
+1:11/0/texture_origin = Vector2i(0, -7)
+
+[sub_resource type="TileSet" id="TileSet_emiey"]
+tile_shape = 1
+tile_size = Vector2i(32, 16)
+sources/0 = SubResource("TileSetAtlasSource_gv1s6")
+
+[sub_resource type="Gradient" id="Gradient_df63u"]
+offsets = PackedFloat32Array(0, 0.0319361, 0.0698603, 0.105788, 0.167665, 0.44511, 0.510978)
+colors = PackedColorArray(0.847059, 0.847059, 0.847059, 1, 0.741176, 0.741176, 0.741176, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0.928571, 1, 1, 1, 0.048588, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_710bu"]
+gradient = SubResource("Gradient_df63u")
+fill = 1
+fill_from = Vector2(0.538462, 0.58547)
+
+[node name="Checkpoint" type="StaticBody2D"]
+texture_filter = 1
+script = ExtResource("1_jahbx")
+
+[node name="Inactive" type="TileMapLayer" parent="."]
+y_sort_enabled = true
+texture_filter = 1
+tile_map_data = PackedByteArray(0, 0, 255, 255, 255, 255, 0, 0, 0, 0, 11, 0, 0, 0)
+tile_set = SubResource("TileSet_u7r82")
+
+[node name="Active" type="TileMapLayer" parent="."]
+visible = false
+y_sort_enabled = true
+tile_map_data = PackedByteArray(0, 0, 255, 255, 255, 255, 0, 0, 1, 0, 11, 0, 0, 0)
+tile_set = SubResource("TileSet_emiey")
+
+[node name="AmbientLight" type="PointLight2D" parent="."]
+visible = false
+position = Vector2(-2, -3)
+scale = Vector2(0.765625, 0.492188)
+color = Color(0.701024, 0.793387, 0.981898, 1)
+texture = SubResource("GradientTexture2D_710bu")
+
+[node name="RayLight" parent="." instance=ExtResource("2_arqdm")]
+visible = false
+position = Vector2(0, -16)
+
+[node name="Area2D" type="Area2D" parent="." groups=["StaticTiles"]]
+collision_layer = 2
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
+polygon = PackedVector2Array(-17, 0, 0, 9, 17, 0, 0, -10)
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

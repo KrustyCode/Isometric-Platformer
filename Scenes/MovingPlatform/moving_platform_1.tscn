@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=4 uid="uid://vwp5ngivfhhy"]
+
+[ext_resource type="PackedScene" uid="uid://bscw01sssdn84" path="res://Scenes/MovingPlatform/moving_platform.tscn" id="1_wvsfp"]
+[ext_resource type="Script" path="res://Scripts/MovingPlatform/MPlatform1.gd" id="2_mko53"]
+
+[node name="moving_platform" instance=ExtResource("1_wvsfp")]
+script = ExtResource("2_mko53")
+
+[node name="TileMapLayer" parent="." index="0"]
+tile_map_data = PackedByteArray("AAD///3/AAABAAEAAAD///7/AAABAAEAAAD+////AAAEAAMAAAAAAP7/AAAEAAEAAAD/////AAAFAAEAAAD//wAAAAAGAAIAAAD//wEAAAAEAAIAAAAAAAAAAAABAAEAAAAAAP//AAAEAAQAAAA=")
+
+[node name="CollisionPolygon2D" parent="Area2D" index="0"]
+polygon = PackedVector2Array(-49, 0, 0, 25, 49, 0, 0, -26)
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="area_exited" from="Area2D" to="." method="_on_area_2d_area_exited"]

@@ -1,0 +1,48 @@
+[gd_scene load_steps=5 format=3 uid="uid://7irxolodo5xi"]
+
+[ext_resource type="PackedScene" uid="uid://sedgqw6m1a1f" path="res://Scenes/player.tscn" id="1_4syjl"]
+[ext_resource type="Texture2D" uid="uid://bqai3bagsq23y" path="res://Assets/Images/Tiles/tiles.png" id="1_n3531"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_g7w2j"]
+resource_name = "Tiles"
+texture = ExtResource("1_n3531")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+0:0/0/texture_origin = Vector2i(0, -1)
+1:0/0 = 0
+1:0/0/texture_origin = Vector2i(0, -1)
+2:0/0 = 0
+2:0/0/texture_origin = Vector2i(0, -1)
+0:1/0 = 0
+0:1/0/texture_origin = Vector2i(0, -1)
+1:1/0 = 0
+1:1/0/texture_origin = Vector2i(0, -1)
+2:1/0 = 0
+2:1/0/texture_origin = Vector2i(0, -1)
+0:2/0 = 0
+0:2/0/texture_origin = Vector2i(0, -1)
+1:2/0 = 0
+1:2/0/texture_origin = Vector2i(0, -1)
+
+[sub_resource type="TileSet" id="TileSet_wsxes"]
+tile_shape = 1
+tile_size = Vector2i(32, 16)
+terrain_set_0/mode = 1
+sources/0 = SubResource("TileSetAtlasSource_g7w2j")
+
+[node name="Ground" type="TileMap"]
+texture_filter = 1
+position = Vector2(252, 141)
+tile_set = SubResource("TileSet_wsxes")
+format = 2
+layer_0/y_sort_enabled = true
+layer_0/tile_data = PackedInt32Array(131071, 65536, 0, 0, 65536, 0, 65536, 65536, 0, 131072, 65536, 0, 196608, 65536, 0, 131073, 65536, 0, 196607, 65536, 0, 262143, 65536, 0, 262144, 65536, 0, -1, 65536, 0, 65535, 65536, 0, 131070, 65536, 0, 196606, 65536, 0, 262142, 65536, 0, 327678, 65536, 0, 393214, 65536, 0, 458751, 65536, 0, 393215, 65536, 0, 327679, 65536, 0, 262141, 65536, 0, -131072, 131072, 0, -65536, 131072, 0, 1, 131072, 0, 65537, 131072, 0, -65537, 0, 1, -2, 0, 1, 65534, 0, 1, 131069, 0, 1, 196605, 0, 1, -131073, 0, 0)
+
+[node name="Player" parent="." instance=ExtResource("1_4syjl")]
+MOVEMENT_SPEED = null
+FRICTION = null
+ACCELERATION = null
+JUMP_HEIGHT = null
+JUMP_TIME_TO_PEAK = null
+JUMP_TIME_TO_DESCENT = null
+GRAVITY = null
